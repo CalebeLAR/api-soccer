@@ -54,4 +54,14 @@ app.put('/teams/:id/:mundiais', (req, res) => {
   res.status(200).json({ updateTeam });
 });
 
+app.delete('/teams/:id', (req, res) => {
+  const { id } = req.params;
+  const arrayPosition = teams.findIndex((team)=> team.id === Number(id));
+
+  if (arrayPosition === -1) res.status(404).json({ message: 'Team not found' });
+
+  teams.splice(arrayPosition, 1);
+  res.status(200).json({ teams });
+})
+
 module.exports = app;
